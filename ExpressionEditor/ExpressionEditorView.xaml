@@ -1,0 +1,31 @@
+﻿<Window x:Class="NINA.InstructionMath.ExpressionEditor.ExpressionEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NINA.InstructionMath.ExpressionEditor"
+        mc:Ignorable="d"
+        Title="ExpressionEditorView" Height="450" Width="800">
+    <Window.DataContext>
+        <local:ExpressionEditorViewModel />
+    </Window.DataContext>
+    <DockPanel LastChildFill="True" Margin="10">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock>Enter your expression below</TextBlock>
+        </StackPanel>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="0,10,0,0">
+            <Button DockPanel.Dock="Left" Margin="0,0,5,0">Check expression</Button>
+            <Button DockPanel.Dock="Left" Margin="0,0,5,0" Command="{Binding EvaluateExpressionCommand}" CommandParameter="">Evaluate expression</Button>
+            <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0">Result: </TextBlock>
+            <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0" Text="{Binding Result}"></TextBlock>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="10,0,0,0">
+            <TextBlock>Variables:</TextBlock>
+            <TextBlock>$count - Number of times this control has looped</TextBlock>
+            <TextBlock>$dawn - Astronomical dawn (in milliseconds since Jan 1 1970)</TextBlock>
+            <TextBlock>$dusk - Astronomical dusk (in milliseconds since Jan 1 1970)</TextBlock>
+            <TextBlock>$now - Time when evaluated (in milliseconds since Jan 1 1970)</TextBlock>
+        </StackPanel>
+        <TextBox DockPanel.Dock="Bottom" MaxLines="50" Text="{Binding Expression}"></TextBox>
+    </DockPanel>
+</Window>
