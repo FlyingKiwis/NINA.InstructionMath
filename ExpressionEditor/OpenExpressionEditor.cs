@@ -11,6 +11,7 @@ namespace NINA.InstructionMath.ExpressionEditor {
 
         public OpenExpressionEditor(IExpressionItem item, ExpressionVariables expressionVariables) 
         {
+           
             _viewModel = new ExpressionEditorViewModel();
             _viewModel.Init(item, expressionVariables);
         }

@@ -6,6 +6,7 @@ using org.mariuszgromada.math.mxparser;
 using NINA.Astrometry.Interfaces;
 using NINA.InstructionMath.ExpressionUtil;
 using NINA.InstructionMath.ExpressionEditor;
+using NINA.Core.Utility;
 
 namespace NINA.InstructionMath.SequenceItems {
 
@@ -21,6 +22,11 @@ namespace NINA.InstructionMath.SequenceItems {
         public MathLoopCondition(INighttimeCalculator nighttimeCalculator) {
             _nighttimeCalculator = nighttimeCalculator;
             _expressionVariables = new ExpressionVariables(_nighttimeCalculator);
+
+            Expression = "Test";
+            TargetValue = 0;
+            Operator = OperatorEnum.Equal;
+
             OpenEditorCommand = new OpenExpressionEditor(this, _expressionVariables);
         }
 

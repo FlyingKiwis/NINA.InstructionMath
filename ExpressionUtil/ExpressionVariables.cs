@@ -19,8 +19,8 @@ namespace NINA.InstructionMath.ExpressionUtil {
 
         public void AddToExpression(Expression expression) 
         {
-            var astronomicDusk = new Constant("$dusk", _duskProvider.GetDateTime(null).ToTimestamp());
-            var astronomicDawn = new Constant("$dawn", _dawnProvider.GetDateTime(null).ToTimestamp());
+            var astronomicDusk = new Constant("[dusk]", _duskProvider.GetDateTime(null).ToTimestamp());
+            var astronomicDawn = new Constant("[dawn]", _dawnProvider.GetDateTime(null).ToTimestamp());
 
             expression.addConstants(astronomicDusk, astronomicDawn);
         }

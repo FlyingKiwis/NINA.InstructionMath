@@ -1,17 +1,5 @@
-﻿using NINA.InstructionMath.ExpressionUtil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NINA.InstructionMath.ExpressionEditor {
     /// <summary>
@@ -20,7 +8,19 @@ namespace NINA.InstructionMath.ExpressionEditor {
     public partial class ExpressionEditorView : Window {
         public ExpressionEditorView(ExpressionEditorViewModel expressionEditorVM) {
             InitializeComponent();
+            _expressionEditorVM = expressionEditorVM;
+            
+
             DataContext = expressionEditorVM;
+
+            _expressionEditorVM.RequestCloseWindow += ExpressionEditorVM_RequestCloseWindow;
+        }
+
+        private ExpressionEditorViewModel _expressionEditorVM;
+
+        private void ExpressionEditorVM_RequestCloseWindow(object sender, EventArgs e) {
+            _expressionEditorVM.RequestCloseWindow -= ExpressionEditorVM_RequestCloseWindow;
+            Close();
         }
     }
 }
