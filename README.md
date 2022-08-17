@@ -39,3 +39,11 @@ The next steps of this plugin are to add more Keywords so that users can come up
 If you would like for me to add a feature [please create an issue with an enhancement label](https://github.com/FlyingKiwis/NINA.InstructionMath/issues)
 
 I'm also open to pull requests if you want to work on new features as well.
+
+# 3rd party Licenses
+
+mXparser has a dual license agreement as this is a free and open source project (FOSS) it is licensed under the non-commercial use license.
+
+The full license can be accessed here:
+
+https://mathparser.org/mxparser-license/
