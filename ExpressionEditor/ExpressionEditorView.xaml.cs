@@ -21,5 +21,9 @@ namespace NINA.InstructionMath.ExpressionEditor {
             _expressionEditorVM.RequestCloseWindow -= ExpressionEditorVM_RequestCloseWindow;
             Close();
         }
+
+        private void ListBoxItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+
+        }
     }
 }

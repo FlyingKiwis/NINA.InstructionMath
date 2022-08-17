@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NINA.InstructionMath.ExpressionEditor" xmlns:wpfutil="clr-namespace:NINA.WPF.Base.Utility;assembly=NINA.WPF.Base"
         mc:Ignorable="d"
-        Title="ExpressionEditorView" Height="450" Width="800" Background="{StaticResource BackgroundBrush}">
+        Title="Expression Editor" Height="550" Width="800" Background="{StaticResource BackgroundBrush}">
     <Window.DataContext>
         <local:ExpressionEditorViewModel />
     </Window.DataContext>
@@ -41,13 +41,13 @@
                 <TextBlock Margin="5" Foreground="{StaticResource ButtonForegroundBrush}">Cancel</TextBlock>
             </Button>
         </DockPanel>
-        <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="10,0,0,0">
-            <TextBlock>Variables:</TextBlock>
-            <TextBlock>count - Number of times this control has looped</TextBlock>
-            <TextBlock>astro_dawn - Astronomical dawn (in milliseconds since Jan 1 1970)</TextBlock>
-            <TextBlock>astro_dusk - Astronomical dusk (in milliseconds since Jan 1 1970)</TextBlock>
-            <TextBlock>time - Time when evaluated (in milliseconds since Jan 1 1970)</TextBlock>
-        </StackPanel>
+        <DockPanel DockPanel.Dock="Right" Margin="10,0,0,0" Width="200" LastChildFill="True">
+            <TextBlock DockPanel.Dock="Top">Keywords (click to get a description)</TextBlock>
+            <ScrollViewer DockPanel.Dock="Bottom">
+                <TextBlock Height="200" TextWrapping="Wrap" Text="{Binding SelectedKeywordDescription}" />
+            </ScrollViewer>
+            <ListBox DockPanel.Dock="Top" Margin="0,5,0,10" Background="{StaticResource BackgroundBrush}" ItemsSource="{Binding Keywords}" SelectedItem="{Binding SelectedKeyword}" MinHeight="100"/>
+        </DockPanel>
         <TextBox DockPanel.Dock="Bottom" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Expression, UpdateSourceTrigger=PropertyChanged}"></TextBox>
     </DockPanel>
 </Window>

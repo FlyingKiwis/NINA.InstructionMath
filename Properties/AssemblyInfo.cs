@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -42,7 +43,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyMetadata("Tags", "")]
 
 //[Optional] A link that will show a log of all changes in between your plugin's versions
-[assembly: AssemblyMetadata("ChangelogURL", "https://github.com/FlyingKiwis/NINA.InstructionMath/CHANGELOG.md")]
+[assembly: AssemblyMetadata("ChangelogURL", "https://github.com/FlyingKiwis/NINA.InstructionMath/blob/master/CHANGELOG.md")]
 
 //[Optional] The url to a featured logo that will be displayed in the plugin list next to the name
 [assembly: AssemblyMetadata("FeaturedImageURL", "")]
@@ -51,7 +52,47 @@ using System.Runtime.InteropServices;
 //[Optional] An additional url to an example example screenshot of your plugin in action
 [assembly: AssemblyMetadata("AltScreenshotURL", "")]
 //[Optional] An in-depth description of your plugin
-[assembly: AssemblyMetadata("LongDescription", @"")]
+[assembly: AssemblyMetadata("LongDescription", @"# Instruction Math
+
+Named based on Pixel Math in PixInsight this plugin's purpose is to provide users with NINA instructions that operate based on a math equation
+
+## Expressions
+
+Each instruction is controlled by a math expressions.  This plugin uses mXparser to evaluate the expressions.
+
+- [Supported built-in functions of mXparser can be found here](https://mathparser.org/mxparser-math-collection/)
+
+## Instructions
+
+Instructions added by this plugin
+
+### Math Loop
+
+This will loop while the expression evaluates to true
+
+- The expression is compared against a target value to determine truthfulness
+- Available comparisons are >, <, >= (greater than or equal), <=, =, != (not equal)
+
+## Keywords *or* Constants, Variables & Functions
+
+In addition to the built in constants and variables this plugin adds some useful ones:
+
+Note: all times are represented as [milliseconds since epoch](https://en.wikipedia.org/wiki/Unix_time)
+
+- **[count]** - The number of times an instruction has been executed
+- **[time]** - the current time
+- **[astro_dawn]** - The next astronomical dawn
+- **[astro_dusk]** - The next astronomical dusk
+
+## Future
+
+The next steps of this plugin are to add more Keywords so that users can come up with more advanced expressions
+
+## Suggestions / Pull Requests
+
+If you would like for me to add a feature [please create an issue with an enhancement label](https://github.com/FlyingKiwis/NINA.InstructionMath/issues)
+
+I'm also open to pull requests if you want to work on new features as well.")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from

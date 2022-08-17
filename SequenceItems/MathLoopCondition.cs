@@ -24,12 +24,12 @@ namespace NINA.InstructionMath.SequenceItems {
     [ExportMetadata("Category", "Instruction Math")]
     [Export(typeof(ISequenceCondition))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class MathLoopCondition : SequenceCondition, IExpressionItem {
+    public class MathLoopCondition : SequenceCondition, IExpressionItem, ICountable {
 
         [ImportingConstructor]
         public MathLoopCondition(INighttimeCalculator nighttimeCalculator) {
             _nighttimeCalculator = nighttimeCalculator;
-            _expressionVariables = new ExpressionVariables(_nighttimeCalculator, this);
+            _expressionVariables = new ExpressionVariables(_nighttimeCalculator, this, this);
 
             foreach (var op in Enum.GetValues(typeof(OperatorEnum)).Cast<OperatorEnum>()) {
                 OperatorItemSource.Add(ToOperatorComboboxItem(op));
@@ -42,11 +42,10 @@ namespace NINA.InstructionMath.SequenceItems {
         private string _expression = "";
         private OperatorEnum _operator = OperatorEnum.Equal;
         private double _targetValue = 0;
-        private int _loopCount = 0;
         private double? _lastResult;
 
         public OpenExpressionEditor OpenEditorCommand { 
-            get => new OpenExpressionEditor(this, _expressionVariables);
+            get => new OpenExpressionEditor(this, _nighttimeCalculator);
         }
 
         [JsonProperty]
@@ -117,24 +116,26 @@ namespace NINA.InstructionMath.SequenceItems {
             }
         }
 
+        public int Count { get; private set; }
+
         public override void ResetProgress() {
             base.ResetProgress();
 
-            _loopCount = 0;
+            Count = 0;
         }
 
         public override void SequenceBlockFinished() {
             base.SequenceBlockFinished();
 
-            _loopCount++;
+            Count++;
         }
 
 
         public override bool Check(ISequenceItem previousItem, ISequenceItem nextItem) {
             var mathExpression = new Expression(Expression);
-            addExpressionVariables(mathExpression);
+            _expressionVariables.AddToExpression(mathExpression);
 
-            if(!mathExpression.checkSyntax()) {
+            if (!mathExpression.checkSyntax()) {
                 Logger.Error($"Expression syntax is invalid, expression: {mathExpression.getExpressionString()} error: {mathExpression.getErrorMessage()}");
                 return false;
             }
@@ -157,7 +158,7 @@ namespace NINA.InstructionMath.SequenceItems {
                 Expression = Expression,
                 TargetValue = TargetValue,
                 Operator = Operator,
-                _loopCount = 0
+                Count = 0
             };
         }
 
@@ -197,13 +198,6 @@ namespace NINA.InstructionMath.SequenceItems {
                 default:
                     return false;
             }
-        }
-
-        private void addExpressionVariables(Expression expression) 
-        {
-            var loopCount = new Constant("[count]", _loopCount);
-            _expressionVariables.AddToExpression(expression);
-            expression.addConstants(loopCount);
         }
 
         private KeyValuePair<OperatorEnum, string> ToOperatorComboboxItem(OperatorEnum selectedOperator) {

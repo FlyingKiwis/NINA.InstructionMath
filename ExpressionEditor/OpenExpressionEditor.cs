@@ -1,4 +1,5 @@
-﻿using NINA.Core.Utility;
+﻿using NINA.Astrometry.Interfaces;
+using NINA.Core.Utility;
 using NINA.InstructionMath.ExpressionUtil;
 using System;
 using System.Windows;
@@ -10,13 +11,13 @@ namespace NINA.InstructionMath.ExpressionEditor {
 
         public event EventHandler CanExecuteChanged;
 
-        public OpenExpressionEditor(IExpressionItem item, ExpressionVariables expressionVariables) 
+        public OpenExpressionEditor(IExpressionItem item, INighttimeCalculator nighttimeCalculator) 
         {
             _item = item;
-            _variables = expressionVariables;
+            _nightCalc = nighttimeCalculator;
         }
 
-        private readonly ExpressionVariables _variables;
+        private readonly INighttimeCalculator _nightCalc;
         private readonly IExpressionItem _item;
 
         public bool CanExecute(object parameter) {
@@ -25,7 +26,7 @@ namespace NINA.InstructionMath.ExpressionEditor {
 
         public void Execute(object parameter) {
             var viewModel = new ExpressionEditorViewModel();
-            viewModel.Init(_item, _variables);
+            viewModel.Init(_item, _nightCalc);
 
             Logger.Info($"Opening expression editor for {_item}");
 

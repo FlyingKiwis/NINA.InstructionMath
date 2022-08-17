@@ -278,6 +278,7 @@
     <Compile Include="ExpressionEditor\IExpressionItem.cs" />
     <Compile Include="ExpressionEditor\OpenExpressionEditor.cs" />
     <Compile Include="ExpressionUtil\ExpressionVariables.cs" />
+    <Compile Include="ExpressionUtil\ICountable.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="InstructionMath.cs" />
     <Compile Include="SequenceItems\MathLoopCondition.cs" />
