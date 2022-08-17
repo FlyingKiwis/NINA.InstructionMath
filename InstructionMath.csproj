@@ -349,7 +349,8 @@ if not exist "%25localappdata%25\NINA\Plugin\$(TargetName)" (
 
 echo "Copying $(PlatformName) $(TargetFileName)"
 xcopy "$(TargetPath)" "%25localappdata%25\NINA\Plugins\$(TargetName)" /h/i/c/k/e/r/y
-		</PostBuildEvent>
+
+xcopy $(TargetDir)"MathParser.org-mXparser.dll" "%25localappdata%25\NINA\Plugins\$(TargetName)" /h/i/c/k/e/r/y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\Google.Protobuf.Tools.3.18.1\build\Google.Protobuf.Tools.targets" Condition="Exists('packages\Google.Protobuf.Tools.3.18.1\build\Google.Protobuf.Tools.targets')" />
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

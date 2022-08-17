@@ -102,7 +102,7 @@ if($createArchive) {
 	}
 	
 	$zipFilePath = "Dist\" + $zipfile
-    Compress-Archive -Path $compressFiles -Destination $zipFilePath
+    Compress-Archive -Path $compressFiles -Destination $zipFilePath -Force
     Write-Output "-------------"
     Write-Output "-------------"
     $checksum = Get-FileHash $zipFilePath
@@ -111,7 +111,7 @@ if($createArchive) {
     $checksum = Get-FileHash $file
 }
 
-$installerUrl = "https://github.com/FlyingKiwis/Nina.InstructionMath/releases/download/v" + $pluginVersion[0] + "." + $pluginVersion[1] + "." + $pluginVersion[2] + "/" + $archiveName;
+$installerUrl = "https://github.com/FlyingKiwis/Nina.InstructionMath/releases/download/v" + $pluginVersion[0] + "." + $pluginVersion[1] + "." + $pluginVersion[2] + "/" + $zipFile;
 
 
 #Installer property gen
