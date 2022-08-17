@@ -1,3 +1,5 @@
+Dist/*
+
 #Exclude external DLL files
 NINA/External/*/Altair
 NINA/External/*/Canon
