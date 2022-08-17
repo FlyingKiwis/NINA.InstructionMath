@@ -27,13 +27,20 @@ namespace NINA.InstructionMath.ExpressionEditor {
         private string _expression;
         private string _result;
         private Expression _mathExpression;
+        private SolidColorBrush _foregroundBrush;
 
         public CommandEvent EvaluateExpressionCommand {get; set;} = new CommandEvent();
         public CommandEvent CheckExpressionSyntaxCommand { get; set; } = new CommandEvent();
         public CommandEvent SaveCommand { get; set; } = new CommandEvent();
         public CommandEvent CancelCommand { get; set; } = new CommandEvent();
 
-        public Color ButtonForegroundColor { get; set; } = (Application.Current.TryFindResource("ForegroundButtonBrush") as SolidColorBrush)?.Color ?? Color.FromRgb(255, 255, 255);
+        public SolidColorBrush ButtonForegroundBrush {
+            get => _foregroundBrush;
+            set {
+                _foregroundBrush = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Expression { get => _expression;
             set { 
@@ -55,11 +62,15 @@ namespace NINA.InstructionMath.ExpressionEditor {
             _item = expressionItem;
             _mathExpression = new Expression("");
             _expressionVariables = expressionVariables;
-            Expression = _item.Expression;
+            Expression = _item.GetExpression();
+
+            Logger.Info($"Get expression={_item.GetExpression()}");
+
             _mathExpression = new Expression(Expression);
             _expressionVariables.AddToExpression(_mathExpression);
-            var count = new Constant("[count]", 0);
+            var count = new Constant("count", 0);
             _mathExpression.addConstants(count);
+            ButtonForegroundBrush = (Application.Current.TryFindResource("ForegroundButtonBrush") as SolidColorBrush) ?? new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
             EvaluateExpressionCommand.Clicked += EvaluateExpressionCommand_Clicked;
             CheckExpressionSyntaxCommand.Clicked += CheckExpressionSyntaxCommand_Clicked;
@@ -68,12 +79,12 @@ namespace NINA.InstructionMath.ExpressionEditor {
         }
 
         private void CancelCommand_Clicked(object sender, EventArgs e) {
-            Expression = _item.Expression;
+            Expression = _item.GetExpression();
             RequestCloseWindow?.Invoke(this, EventArgs.Empty);
         }
 
         private void SaveCommand_Clicked(object sender, EventArgs e) {
-            _item.Expression = Expression;
+            _item.SetExpression(Expression);
             Logger.Info($"Saving expression = {Expression}");
             RequestCloseWindow?.Invoke(this, EventArgs.Empty);
         }

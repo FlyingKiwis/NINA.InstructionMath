@@ -15,19 +15,27 @@
             <TextBlock>Enter your expression below</TextBlock>
         </StackPanel>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="0,10,0,0">
-            <Button DockPanel.Dock="Left" Margin="0,0,5,0" Padding="5" Command="{Binding CheckExpressionSyntaxCommand}" CommandParameter="" Foreground="{Binding ButtonForegroundColor}">Check expression</Button>
-            <Button DockPanel.Dock="Left" Margin="0,0,5,0" Padding="5" Command="{Binding EvaluateExpressionCommand}" CommandParameter="" Foreground="{Binding ButtonForegroundColor}">Evaluate expression</Button>
-            <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0">Result:</TextBlock>
-            <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0" Text="{Binding Result}"></TextBlock>
-            <Button DockPanel.Dock="Right" Margin="5,0,0,0" Padding="5" Command="{Binding SaveCommand}" Foreground="{Binding ButtonForegroundColor}">Save</Button>
-            <Button DockPanel.Dock="Right" Margin="5,0,0,0" Padding="5" Command="{Binding CancelCommand}" Foreground="{Binding ButtonForegroundColor}">Cancel</Button>
+            <Button DockPanel.Dock="Left" Margin="0,0,5,0" Padding="5" Command="{Binding CheckExpressionSyntaxCommand}" CommandParameter="">
+                <TextBlock Margin="5" Foreground="{Binding ButtonForegroundBrush}">Check Syntax</TextBlock>
+            </Button>
+            <Button DockPanel.Dock="Left" Margin="0,0,5,0" Padding="5" Command="{Binding EvaluateExpressionCommand}" CommandParameter="">
+                <TextBlock Margin="5" Foreground="{Binding ButtonForegroundBrush}">Calculate</TextBlock>
+            </Button>
+            <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0" VerticalAlignment="Center" FontSize="18">Result:</TextBlock>
+            <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0" VerticalAlignment="Center" FontSize="18" Text="{Binding Result}"></TextBlock>
+            <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SaveCommand}">
+                <TextBlock Margin="5" Foreground="{Binding ButtonForegroundBrush}">Save</TextBlock>
+            </Button>
+            <Button DockPanel.Dock="Right" Margin="5,0,0,0" Padding="5" Command="{Binding CancelCommand}">
+                <TextBlock Margin="5" Foreground="{Binding ButtonForegroundBrush}">Cancel</TextBlock>
+            </Button>
         </DockPanel>
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="10,0,0,0">
             <TextBlock>Variables:</TextBlock>
-            <TextBlock>[count] - Number of times this control has looped</TextBlock>
-            <TextBlock>[dawn] - Astronomical dawn (in milliseconds since Jan 1 1970)</TextBlock>
-            <TextBlock>[dusk] - Astronomical dusk (in milliseconds since Jan 1 1970)</TextBlock>
-            <TextBlock>[now] - Time when evaluated (in milliseconds since Jan 1 1970)</TextBlock>
+            <TextBlock>count - Number of times this control has looped</TextBlock>
+            <TextBlock>astro_dawn - Astronomical dawn (in milliseconds since Jan 1 1970)</TextBlock>
+            <TextBlock>astro_dusk - Astronomical dusk (in milliseconds since Jan 1 1970)</TextBlock>
+            <TextBlock>time - Time when evaluated (in milliseconds since Jan 1 1970)</TextBlock>
         </StackPanel>
         <TextBox DockPanel.Dock="Bottom" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Expression, UpdateSourceTrigger=PropertyChanged}"></TextBox>
     </DockPanel>

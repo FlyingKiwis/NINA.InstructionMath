@@ -11,6 +11,7 @@ namespace NINA.InstructionMath.SequenceItems
         GreaterThan,
         GreaterThanOrEqual,
         Equal,
+        NotEqual,
         LessThan, 
         LessThanOrEqual
     }

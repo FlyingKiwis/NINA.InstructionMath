@@ -18,9 +18,21 @@
     <DataTemplate DataType="{x:Type local:MathLoopCondition}">
         <nina:SequenceBlockView>
             <nina:SequenceBlockView.SequenceItemContent>
-                <StackPanel Orientation="Horizontal">
-                    <Button Padding="5" Command="{Binding OpenEditorCommand}" CommandParameter="Math Loop" Foreground="{Binding ButtonForegroundColor}">Open Expression Editor</Button>
-                </StackPanel>
+                <DockPanel LastChildFill="False">
+                    <Button DockPanel.Dock="Left" Command="{Binding OpenEditorCommand}" CommandParameter="Math Loop">
+                        <TextBlock Margin="5" Foreground="{Binding ButtonForegroundBrush}">Open Expression Editor</TextBlock>
+                    </Button>
+                    <StackPanel Margin="10,0,0,0" DockPanel.Dock="Left" Orientation="Horizontal">
+                        <TextBlock Margin="0,0,5,0" VerticalAlignment="Center">Loop while result</TextBlock>
+                        <ComboBox Margin="0,0,5,0" VerticalAlignment="Center" ItemsSource="{Binding OperatorItemSource}" SelectedItem="{Binding SelectedOperator}" DisplayMemberPath="Value" />
+                        <TextBox VerticalAlignment="Center" Text="{Binding TargetValueText}"/>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Visibility="{Binding ResultVisibility}" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding LastResult}"/>
+                        <TextBlock Margin="3,0,3,0"  Text="{Binding OperatorText}" />
+                        <TextBlock Text="{Binding TargetValueText}"/>
+                    </StackPanel>
+                </DockPanel>
             </nina:SequenceBlockView.SequenceItemContent>
         </nina:SequenceBlockView>
     </DataTemplate>
@@ -30,8 +42,10 @@
     <DataTemplate x:Key="NINA.InstructionMath.SequenceItems.MathLoopCondition_Mini">
         <mini:MiniSequenceItem>
             <mini:MiniSequenceItem.SequenceItemContent>
-                <StackPanel Orientation="Horizontal">
-
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Visibility="{Binding ResultVisibility}" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding LastResult}"/>
+                    <TextBlock Margin="3,0,3,0" Text="{Binding OperatorText}" />
+                    <TextBlock Text="{Binding TargetValueText}"/>
                 </StackPanel>
             </mini:MiniSequenceItem.SequenceItemContent>
         </mini:MiniSequenceItem>
