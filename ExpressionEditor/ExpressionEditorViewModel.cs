@@ -3,15 +3,10 @@ using NINA.InstructionMath.ExpressionUtil;
 using NINA.InstructionMath.Util;
 using org.mariuszgromada.math.mxparser;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
-using Expression =  org.mariuszgromada.math.mxparser.Expression;
+using Expression = org.mariuszgromada.math.mxparser.Expression;
 
 namespace NINA.InstructionMath.ExpressionEditor {
     public class ExpressionEditorViewModel : INotifyPropertyChanged {
@@ -19,28 +14,12 @@ namespace NINA.InstructionMath.ExpressionEditor {
         public ExpressionEditorViewModel() {
         }
 
-        public event EventHandler RequestCloseWindow;
-
-        private IExpressionItem _item;
-        private ExpressionVariables _expressionVariables;
-
-        private string _expression;
-        private string _result;
-        private Expression _mathExpression;
-        private SolidColorBrush _foregroundBrush;
+        public event EventHandler RequestCloseWindow;        
 
         public CommandEvent EvaluateExpressionCommand {get; set;} = new CommandEvent();
         public CommandEvent CheckExpressionSyntaxCommand { get; set; } = new CommandEvent();
         public CommandEvent SaveCommand { get; set; } = new CommandEvent();
         public CommandEvent CancelCommand { get; set; } = new CommandEvent();
-
-        public SolidColorBrush ButtonForegroundBrush {
-            get => _foregroundBrush;
-            set {
-                _foregroundBrush = value;
-                OnPropertyChanged();
-            }
-        }
 
         public string Expression { get => _expression;
             set { 
@@ -58,10 +37,18 @@ namespace NINA.InstructionMath.ExpressionEditor {
             }
         }
 
+        private IExpressionItem _item;
+        private ExpressionVariables _expressionVariables;
+
+        private string _expression;
+        private string _result;
+        private Expression _mathExpression;
+
         public void Init(IExpressionItem expressionItem, ExpressionVariables expressionVariables) {
             _item = expressionItem;
             _mathExpression = new Expression("");
             _expressionVariables = expressionVariables;
+
             Expression = _item.GetExpression();
 
             Logger.Info($"Get expression={_item.GetExpression()}");
@@ -70,7 +57,6 @@ namespace NINA.InstructionMath.ExpressionEditor {
             _expressionVariables.AddToExpression(_mathExpression);
             var count = new Constant("count", 0);
             _mathExpression.addConstants(count);
-            ButtonForegroundBrush = (Application.Current.TryFindResource("ForegroundButtonBrush") as SolidColorBrush) ?? new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
             EvaluateExpressionCommand.Clicked += EvaluateExpressionCommand_Clicked;
             CheckExpressionSyntaxCommand.Clicked += CheckExpressionSyntaxCommand_Clicked;

@@ -36,7 +36,6 @@ namespace NINA.InstructionMath {
                 Settings.Default.UpdateSettings = false;
                 CoreUtil.SaveSettings(Settings.Default);
             }
-
         }
 
         public override Task Teardown() {

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Windows;
 using Expression = org.mariuszgromada.math.mxparser.Expression;
 using NINA.Core.Utility;
+using NINA.Profile.Interfaces;
 
 namespace NINA.InstructionMath.SequenceItems {
 
@@ -29,7 +30,6 @@ namespace NINA.InstructionMath.SequenceItems {
         public MathLoopCondition(INighttimeCalculator nighttimeCalculator) {
             _nighttimeCalculator = nighttimeCalculator;
             _expressionVariables = new ExpressionVariables(_nighttimeCalculator, this);
-            ButtonForegroundBrush = (Application.Current.TryFindResource("ForegroundButtonBrush") as SolidColorBrush) ?? new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
             foreach (var op in Enum.GetValues(typeof(OperatorEnum)).Cast<OperatorEnum>()) {
                 OperatorItemSource.Add(ToOperatorComboboxItem(op));
@@ -43,7 +43,6 @@ namespace NINA.InstructionMath.SequenceItems {
         private OperatorEnum _operator = OperatorEnum.Equal;
         private double _targetValue = 0;
         private int _loopCount = 0;
-        private SolidColorBrush _foregroundBrush;
         private double? _lastResult;
 
         public OpenExpressionEditor OpenEditorCommand { 
@@ -103,14 +102,6 @@ namespace NINA.InstructionMath.SequenceItems {
 
         public string OperatorText {
             get => SelectedOperator.Value;
-        }
-
-        public SolidColorBrush ButtonForegroundBrush {
-            get => _foregroundBrush;
-            set {
-                _foregroundBrush = value;
-                RaisePropertyChanged();
-            }
         }
 
         public ObservableCollection<KeyValuePair<OperatorEnum, string>> OperatorItemSource { get; set; } = new ObservableCollection<KeyValuePair<OperatorEnum, string>>();

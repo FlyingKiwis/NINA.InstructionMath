@@ -10,7 +10,6 @@ namespace NINA.InstructionMath.ExpressionEditor {
             InitializeComponent();
             _expressionEditorVM = expressionEditorVM;
             
-
             DataContext = expressionEditorVM;
 
             _expressionEditorVM.RequestCloseWindow += ExpressionEditorVM_RequestCloseWindow;
