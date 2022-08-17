@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // [MANDATORY] The following GUID is used as a unique identifier of the plugin. Generate a fresh one for your plugin!
@@ -54,7 +52,7 @@ using System.Runtime.InteropServices;
 //[Optional] An in-depth description of your plugin
 [assembly: AssemblyMetadata("LongDescription", @"# Instruction Math
 
-Named based on Pixel Math in PixInsight this plugin's purpose is to provide users with NINA instructions that operate based on a math equation
+This plugin's purpose is to provide users with NINA instructions that operate based on a math equation
 
 ## Expressions
 

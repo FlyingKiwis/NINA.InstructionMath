@@ -1,6 +1,6 @@
 ﻿# Instruction Math
 
-Named based on Pixel Math in PixInsight this plugin's purpose is to provide users with NINA instructions that operate based on a math equation
+This plugin's purpose is to provide users with NINA instructions that operate based on a math equation
 
 ## Expressions
 
@@ -39,8 +39,3 @@ The next steps of this plugin are to add more Keywords so that users can come up
 If you would like for me to add a feature [please create an issue with an enhancement label](https://github.com/FlyingKiwis/NINA.InstructionMath/issues)
 
 I'm also open to pull requests if you want to work on new features as well.
-
-
-
-
-
